@@ -1,4 +1,5 @@
-name
-Alice
-Bob
-THIS IS A SUPER LONG NAME
+name, email
+Alice, alice@email.com
+Bob, bob@email.com
+Candice, candice@email.com
+ThisIsAReallyLongName, thisisareallylongemail@email.com
