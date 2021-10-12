@@ -63,6 +63,12 @@ def export_and_send(template, name, email):
         return email
 
 
+@sockio.on('resend')
+def resend(data):
+    temp = Template('./cert_template/android.svg')
+    sockio.emit("status", {"email": data['email'], "status":"🟨 Waiting"})
+    executor.submit(export_and_send, temp, data['name'], data['email'])
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     temp = Template('./cert_template/android.svg')

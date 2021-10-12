@@ -44,6 +44,7 @@
               <th>Name</th>
               <th>Email</th>
               <th>Status</th>
+              <th>Resend</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +53,7 @@
               <td>{{ i['name'] }}</td>
               <td>{{ i['email'] }}</td>
               <td id="{{ i['email'] }}">🟨 Waiting</td>
+              <td><a href="#" onclick="resend('{{ i['name'] }}', '{{ i['email'] }}')">Resend</a></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -75,6 +77,10 @@
         let ele = document.getElementById(msg.email);
         ele.innerText = msg.status;
       });
+
+      function resend(name, email) {
+          socket.emit('resend', {name: name, email: email})
+      }
     </script>
 
     <!-- End Document
