@@ -47,14 +47,14 @@ def export_and_send(template, name, email):
         print("[{}] Finished generating certificate".format(email))
         try:
             msg = Message(
-                'Congratulations',
+                'Certificate for Android Study Jams 2020 | GDSC JSSSTU',
                 sender=('GDSC JSSSTU', EMAIL_USERNAME),
                 recipients=[email]
             )
             #msg.html = render_template('email.html')
-            msg.body = 'Here is your certificate!'
+            msg.html = 'Hey {}, <br/><br/>Here is your certificate for Android Study Jams 2020! Congratulations!<br/><br/>Regards,<br/>Team GDSC JSSSTU'.format(name)
             with app.open_resource("out/cert_{}.pdf".format(email)) as fp:
-                msg.attach("out/cert_{}.pdf".format(email), 'application/pdf', fp.read())
+                msg.attach("{}.pdf".format(email), 'application/pdf', fp.read())
             mail.send(msg)
             sockio.emit("status", {"email": email, "status":"🟩 Done"})
         except Exception as e:
